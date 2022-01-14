@@ -1,0 +1,392 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 4.1.0 #12072 (Mac OS X ppc)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module pushTest
+                                      6 	.optsdcc -mmcs51 --model-small
+                                      7 	
+                                      8 ;--------------------------------------------------------
+                                      9 ; Public variables in this module
+                                     10 ;--------------------------------------------------------
+                                     11 	.globl __mcs51_genXRAMCLEAR
+                                     12 	.globl __mcs51_genXINIT
+                                     13 	.globl __mcs51_genRAMCLEAR
+                                     14 	.globl __sdcc_gsinit_startup
+                                     15 	.globl _main
+                                     16 	.globl _testP
+                                     17 	.globl _CY
+                                     18 	.globl _AC
+                                     19 	.globl _F0
+                                     20 	.globl _RS1
+                                     21 	.globl _RS0
+                                     22 	.globl _OV
+                                     23 	.globl _F1
+                                     24 	.globl _P
+                                     25 	.globl _PS
+                                     26 	.globl _PT1
+                                     27 	.globl _PX1
+                                     28 	.globl _PT0
+                                     29 	.globl _PX0
+                                     30 	.globl _RD
+                                     31 	.globl _WR
+                                     32 	.globl _T1
+                                     33 	.globl _T0
+                                     34 	.globl _INT1
+                                     35 	.globl _INT0
+                                     36 	.globl _TXD
+                                     37 	.globl _RXD
+                                     38 	.globl _P3_7
+                                     39 	.globl _P3_6
+                                     40 	.globl _P3_5
+                                     41 	.globl _P3_4
+                                     42 	.globl _P3_3
+                                     43 	.globl _P3_2
+                                     44 	.globl _P3_1
+                                     45 	.globl _P3_0
+                                     46 	.globl _EA
+                                     47 	.globl _ES
+                                     48 	.globl _ET1
+                                     49 	.globl _EX1
+                                     50 	.globl _ET0
+                                     51 	.globl _EX0
+                                     52 	.globl _P2_7
+                                     53 	.globl _P2_6
+                                     54 	.globl _P2_5
+                                     55 	.globl _P2_4
+                                     56 	.globl _P2_3
+                                     57 	.globl _P2_2
+                                     58 	.globl _P2_1
+                                     59 	.globl _P2_0
+                                     60 	.globl _SM0
+                                     61 	.globl _SM1
+                                     62 	.globl _SM2
+                                     63 	.globl _REN
+                                     64 	.globl _TB8
+                                     65 	.globl _RB8
+                                     66 	.globl _TI
+                                     67 	.globl _RI
+                                     68 	.globl _P1_7
+                                     69 	.globl _P1_6
+                                     70 	.globl _P1_5
+                                     71 	.globl _P1_4
+                                     72 	.globl _P1_3
+                                     73 	.globl _P1_2
+                                     74 	.globl _P1_1
+                                     75 	.globl _P1_0
+                                     76 	.globl _TF1
+                                     77 	.globl _TR1
+                                     78 	.globl _TF0
+                                     79 	.globl _TR0
+                                     80 	.globl _IE1
+                                     81 	.globl _IT1
+                                     82 	.globl _IE0
+                                     83 	.globl _IT0
+                                     84 	.globl _P0_7
+                                     85 	.globl _P0_6
+                                     86 	.globl _P0_5
+                                     87 	.globl _P0_4
+                                     88 	.globl _P0_3
+                                     89 	.globl _P0_2
+                                     90 	.globl _P0_1
+                                     91 	.globl _P0_0
+                                     92 	.globl _B
+                                     93 	.globl _ACC
+                                     94 	.globl _PSW
+                                     95 	.globl _IP
+                                     96 	.globl _P3
+                                     97 	.globl _IE
+                                     98 	.globl _P2
+                                     99 	.globl _SBUF
+                                    100 	.globl _SCON
+                                    101 	.globl _P1
+                                    102 	.globl _TH1
+                                    103 	.globl _TH0
+                                    104 	.globl _TL1
+                                    105 	.globl _TL0
+                                    106 	.globl _TMOD
+                                    107 	.globl _TCON
+                                    108 	.globl _PCON
+                                    109 	.globl _DPH
+                                    110 	.globl _DPL
+                                    111 	.globl _SP
+                                    112 	.globl _P0
+                                    113 ;--------------------------------------------------------
+                                    114 ; special function registers
+                                    115 ;--------------------------------------------------------
+                                    116 	.area RSEG    (ABS,DATA)
+      000000                        117 	.org 0x0000
+                           000080   118 _P0	=	0x0080
+                           000081   119 _SP	=	0x0081
+                           000082   120 _DPL	=	0x0082
+                           000083   121 _DPH	=	0x0083
+                           000087   122 _PCON	=	0x0087
+                           000088   123 _TCON	=	0x0088
+                           000089   124 _TMOD	=	0x0089
+                           00008A   125 _TL0	=	0x008a
+                           00008B   126 _TL1	=	0x008b
+                           00008C   127 _TH0	=	0x008c
+                           00008D   128 _TH1	=	0x008d
+                           000090   129 _P1	=	0x0090
+                           000098   130 _SCON	=	0x0098
+                           000099   131 _SBUF	=	0x0099
+                           0000A0   132 _P2	=	0x00a0
+                           0000A8   133 _IE	=	0x00a8
+                           0000B0   134 _P3	=	0x00b0
+                           0000B8   135 _IP	=	0x00b8
+                           0000D0   136 _PSW	=	0x00d0
+                           0000E0   137 _ACC	=	0x00e0
+                           0000F0   138 _B	=	0x00f0
+                                    139 ;--------------------------------------------------------
+                                    140 ; special function bits
+                                    141 ;--------------------------------------------------------
+                                    142 	.area RSEG    (ABS,DATA)
+      000000                        143 	.org 0x0000
+                           000080   144 _P0_0	=	0x0080
+                           000081   145 _P0_1	=	0x0081
+                           000082   146 _P0_2	=	0x0082
+                           000083   147 _P0_3	=	0x0083
+                           000084   148 _P0_4	=	0x0084
+                           000085   149 _P0_5	=	0x0085
+                           000086   150 _P0_6	=	0x0086
+                           000087   151 _P0_7	=	0x0087
+                           000088   152 _IT0	=	0x0088
+                           000089   153 _IE0	=	0x0089
+                           00008A   154 _IT1	=	0x008a
+                           00008B   155 _IE1	=	0x008b
+                           00008C   156 _TR0	=	0x008c
+                           00008D   157 _TF0	=	0x008d
+                           00008E   158 _TR1	=	0x008e
+                           00008F   159 _TF1	=	0x008f
+                           000090   160 _P1_0	=	0x0090
+                           000091   161 _P1_1	=	0x0091
+                           000092   162 _P1_2	=	0x0092
+                           000093   163 _P1_3	=	0x0093
+                           000094   164 _P1_4	=	0x0094
+                           000095   165 _P1_5	=	0x0095
+                           000096   166 _P1_6	=	0x0096
+                           000097   167 _P1_7	=	0x0097
+                           000098   168 _RI	=	0x0098
+                           000099   169 _TI	=	0x0099
+                           00009A   170 _RB8	=	0x009a
+                           00009B   171 _TB8	=	0x009b
+                           00009C   172 _REN	=	0x009c
+                           00009D   173 _SM2	=	0x009d
+                           00009E   174 _SM1	=	0x009e
+                           00009F   175 _SM0	=	0x009f
+                           0000A0   176 _P2_0	=	0x00a0
+                           0000A1   177 _P2_1	=	0x00a1
+                           0000A2   178 _P2_2	=	0x00a2
+                           0000A3   179 _P2_3	=	0x00a3
+                           0000A4   180 _P2_4	=	0x00a4
+                           0000A5   181 _P2_5	=	0x00a5
+                           0000A6   182 _P2_6	=	0x00a6
+                           0000A7   183 _P2_7	=	0x00a7
+                           0000A8   184 _EX0	=	0x00a8
+                           0000A9   185 _ET0	=	0x00a9
+                           0000AA   186 _EX1	=	0x00aa
+                           0000AB   187 _ET1	=	0x00ab
+                           0000AC   188 _ES	=	0x00ac
+                           0000AF   189 _EA	=	0x00af
+                           0000B0   190 _P3_0	=	0x00b0
+                           0000B1   191 _P3_1	=	0x00b1
+                           0000B2   192 _P3_2	=	0x00b2
+                           0000B3   193 _P3_3	=	0x00b3
+                           0000B4   194 _P3_4	=	0x00b4
+                           0000B5   195 _P3_5	=	0x00b5
+                           0000B6   196 _P3_6	=	0x00b6
+                           0000B7   197 _P3_7	=	0x00b7
+                           0000B0   198 _RXD	=	0x00b0
+                           0000B1   199 _TXD	=	0x00b1
+                           0000B2   200 _INT0	=	0x00b2
+                           0000B3   201 _INT1	=	0x00b3
+                           0000B4   202 _T0	=	0x00b4
+                           0000B5   203 _T1	=	0x00b5
+                           0000B6   204 _WR	=	0x00b6
+                           0000B7   205 _RD	=	0x00b7
+                           0000B8   206 _PX0	=	0x00b8
+                           0000B9   207 _PT0	=	0x00b9
+                           0000BA   208 _PX1	=	0x00ba
+                           0000BB   209 _PT1	=	0x00bb
+                           0000BC   210 _PS	=	0x00bc
+                           0000D0   211 _P	=	0x00d0
+                           0000D1   212 _F1	=	0x00d1
+                           0000D2   213 _OV	=	0x00d2
+                           0000D3   214 _RS0	=	0x00d3
+                           0000D4   215 _RS1	=	0x00d4
+                           0000D5   216 _F0	=	0x00d5
+                           0000D6   217 _AC	=	0x00d6
+                           0000D7   218 _CY	=	0x00d7
+                                    219 ;--------------------------------------------------------
+                                    220 ; overlayable register banks
+                                    221 ;--------------------------------------------------------
+                                    222 	.area REG_BANK_0	(REL,OVR,DATA)
+      000000                        223 	.ds 8
+                                    224 ;--------------------------------------------------------
+                                    225 ; internal ram data
+                                    226 ;--------------------------------------------------------
+                                    227 	.area DSEG    (DATA)
+                           000030   228 _test	=	0x0030
+                                    229 ;--------------------------------------------------------
+                                    230 ; overlayable items in internal ram 
+                                    231 ;--------------------------------------------------------
+                                    232 	.area	OSEG    (OVR,DATA)
+                                    233 ;--------------------------------------------------------
+                                    234 ; Stack segment in internal ram 
+                                    235 ;--------------------------------------------------------
+                                    236 	.area	SSEG
+      000008                        237 __start__stack:
+      000008                        238 	.ds	1
+                                    239 
+                                    240 ;--------------------------------------------------------
+                                    241 ; indirectly addressable internal ram data
+                                    242 ;--------------------------------------------------------
+                                    243 	.area ISEG    (DATA)
+                                    244 ;--------------------------------------------------------
+                                    245 ; absolute internal ram data
+                                    246 ;--------------------------------------------------------
+                                    247 	.area IABS    (ABS,DATA)
+                                    248 	.area IABS    (ABS,DATA)
+                                    249 ;--------------------------------------------------------
+                                    250 ; bit data
+                                    251 ;--------------------------------------------------------
+                                    252 	.area BSEG    (BIT)
+                                    253 ;--------------------------------------------------------
+                                    254 ; paged external ram data
+                                    255 ;--------------------------------------------------------
+                                    256 	.area PSEG    (PAG,XDATA)
+                                    257 ;--------------------------------------------------------
+                                    258 ; external ram data
+                                    259 ;--------------------------------------------------------
+                                    260 	.area XSEG    (XDATA)
+                                    261 ;--------------------------------------------------------
+                                    262 ; absolute external ram data
+                                    263 ;--------------------------------------------------------
+                                    264 	.area XABS    (ABS,XDATA)
+                                    265 ;--------------------------------------------------------
+                                    266 ; external initialized ram data
+                                    267 ;--------------------------------------------------------
+                                    268 	.area XISEG   (XDATA)
+                                    269 	.area HOME    (CODE)
+                                    270 	.area GSINIT0 (CODE)
+                                    271 	.area GSINIT1 (CODE)
+                                    272 	.area GSINIT2 (CODE)
+                                    273 	.area GSINIT3 (CODE)
+                                    274 	.area GSINIT4 (CODE)
+                                    275 	.area GSINIT5 (CODE)
+                                    276 	.area GSINIT  (CODE)
+                                    277 	.area GSFINAL (CODE)
+                                    278 	.area CSEG    (CODE)
+                                    279 ;--------------------------------------------------------
+                                    280 ; interrupt vector 
+                                    281 ;--------------------------------------------------------
+                                    282 	.area HOME    (CODE)
+      000000                        283 __interrupt_vect:
+      000000 02 00 1A         [24]  284 	ljmp	__sdcc_gsinit_startup
+                                    285 ;--------------------------------------------------------
+                                    286 ; global & static initialisations
+                                    287 ;--------------------------------------------------------
+                                    288 	.area HOME    (CODE)
+                                    289 	.area GSINIT  (CODE)
+                                    290 	.area GSFINAL (CODE)
+                                    291 	.area GSINIT  (CODE)
+                                    292 	.globl __sdcc_gsinit_startup
+                                    293 	.globl __sdcc_program_startup
+                                    294 	.globl __start__stack
+                                    295 	.globl __mcs51_genXINIT
+                                    296 	.globl __mcs51_genXRAMCLEAR
+                                    297 	.globl __mcs51_genRAMCLEAR
+                                    298 	.area GSFINAL (CODE)
+      000006 02 00 03         [24]  299 	ljmp	__sdcc_program_startup
+                                    300 ;--------------------------------------------------------
+                                    301 ; Home
+                                    302 ;--------------------------------------------------------
+                                    303 	.area HOME    (CODE)
+                                    304 	.area HOME    (CODE)
+      000003                        305 __sdcc_program_startup:
+      000003 02 00 0E         [24]  306 	ljmp	_main
+                                    307 ;	return from main will return to caller
+                                    308 ;--------------------------------------------------------
+                                    309 ; code
+                                    310 ;--------------------------------------------------------
+                                    311 	.area CSEG    (CODE)
+                                    312 ;------------------------------------------------------------
+                                    313 ;Allocation info for local variables in function 'testP'
+                                    314 ;------------------------------------------------------------
+                                    315 ;p                         Allocated to registers 
+                                    316 ;------------------------------------------------------------
+                                    317 ;	pushTest.c:5: void testP(char p){
+                                    318 ;	-----------------------------------------
+                                    319 ;	 function testP
+                                    320 ;	-----------------------------------------
+      000009                        321 _testP:
+                           000007   322 	ar7 = 0x07
+                           000006   323 	ar6 = 0x06
+                           000005   324 	ar5 = 0x05
+                           000004   325 	ar4 = 0x04
+                           000003   326 	ar3 = 0x03
+                           000002   327 	ar2 = 0x02
+                           000001   328 	ar1 = 0x01
+                           000000   329 	ar0 = 0x00
+                                    330 ;	pushTest.c:9: __endasm;
+      000009 C0 82            [24]  331 	push	dpl;; push low byte of p
+      00000B C0 30            [24]  332 	push	_test;
+                                    333 ;	pushTest.c:10: }
+      00000D 22               [24]  334 	ret
+                                    335 ;------------------------------------------------------------
+                                    336 ;Allocation info for local variables in function 'main'
+                                    337 ;------------------------------------------------------------
+                                    338 ;	pushTest.c:12: void main()
+                                    339 ;	-----------------------------------------
+                                    340 ;	 function main
+                                    341 ;	-----------------------------------------
+      00000E                        342 _main:
+                                    343 ;	pushTest.c:14: SP = 0x40;
+      00000E 75 81 40         [24]  344 	mov	_SP,#0x40
+                                    345 ;	pushTest.c:15: test = 0x31;
+      000011 75 30 31         [24]  346 	mov	_test,#0x31
+                                    347 ;	pushTest.c:16: testP(0x32);
+      000014 75 82 32         [24]  348 	mov	dpl,#0x32
+                                    349 ;	pushTest.c:17: }
+      000017 02 00 09         [24]  350 	ljmp	_testP
+                                    351 ;------------------------------------------------------------
+                                    352 ;Allocation info for local variables in function '_sdcc_gsinit_startup'
+                                    353 ;------------------------------------------------------------
+                                    354 ;	pushTest.c:19: void _sdcc_gsinit_startup(void) {
+                                    355 ;	-----------------------------------------
+                                    356 ;	 function _sdcc_gsinit_startup
+                                    357 ;	-----------------------------------------
+      00001A                        358 __sdcc_gsinit_startup:
+                                    359 ;	pushTest.c:20: main();
+                                    360 ;	pushTest.c:21: }
+      00001A 02 00 0E         [24]  361 	ljmp	_main
+                                    362 ;------------------------------------------------------------
+                                    363 ;Allocation info for local variables in function '_mcs51_genRAMCLEAR'
+                                    364 ;------------------------------------------------------------
+                                    365 ;	pushTest.c:22: void _mcs51_genRAMCLEAR(void) { }
+                                    366 ;	-----------------------------------------
+                                    367 ;	 function _mcs51_genRAMCLEAR
+                                    368 ;	-----------------------------------------
+      00001D                        369 __mcs51_genRAMCLEAR:
+      00001D 22               [24]  370 	ret
+                                    371 ;------------------------------------------------------------
+                                    372 ;Allocation info for local variables in function '_mcs51_genXINIT'
+                                    373 ;------------------------------------------------------------
+                                    374 ;	pushTest.c:23: void _mcs51_genXINIT(void) { }
+                                    375 ;	-----------------------------------------
+                                    376 ;	 function _mcs51_genXINIT
+                                    377 ;	-----------------------------------------
+      00001E                        378 __mcs51_genXINIT:
+      00001E 22               [24]  379 	ret
+                                    380 ;------------------------------------------------------------
+                                    381 ;Allocation info for local variables in function '_mcs51_genXRAMCLEAR'
+                                    382 ;------------------------------------------------------------
+                                    383 ;	pushTest.c:24: void _mcs51_genXRAMCLEAR(void) { }
+                                    384 ;	-----------------------------------------
+                                    385 ;	 function _mcs51_genXRAMCLEAR
+                                    386 ;	-----------------------------------------
+      00001F                        387 __mcs51_genXRAMCLEAR:
+      00001F 22               [24]  388 	ret
+                                    389 	.area CSEG    (CODE)
+                                    390 	.area CONST   (CODE)
+                                    391 	.area XINIT   (CODE)
+                                    392 	.area CABS    (ABS,CODE)
