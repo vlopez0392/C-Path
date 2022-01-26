@@ -24,6 +24,6 @@ void display(char ch, int lines, int width){
         for(col = 1; col <= width; col++){
             putchar(ch);
         }
-        putchar('\n'); //End line and star new one
+        putchar('\n'); //End line and start a new one
     }
 }
