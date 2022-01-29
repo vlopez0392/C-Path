@@ -20,15 +20,10 @@ int main(void){
     int otherNumber = 0;
     int * somePointer = NULL; //Good practice 
 
-    otherNumber = 10;
+    otherNumber = -10;
     somePointer = &otherNumber;
     printf("somePointer value: %p \n",somePointer);
-    printf("%lu", sizeof(somePointer));
+    printf("Size of pointer %zd", sizeof(somePointer));
     
-
-
-
-
-
     return 0;
 }
