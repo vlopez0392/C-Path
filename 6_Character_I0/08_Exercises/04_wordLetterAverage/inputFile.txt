@@ -1,0 +1,2 @@
+Help me count the words.
+This is a new line.

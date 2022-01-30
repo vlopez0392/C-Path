@@ -1,5 +1,7 @@
-Lets perform a stress test in our ascii printer!
-One
-Two
-Three
-Four
+How many UppeRcaSe characterS will I find? 
+How many lowerCASE CharaCtErS will YOU FIND? 
+HELP me coUnt them PLEASE! 
+One? 
+Two? 
+Three? 
+Four?  
