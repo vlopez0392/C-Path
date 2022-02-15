@@ -4,28 +4,31 @@
 */
 
 #include <stdio.h>
-int getStringLength(char * const charArray );
+int getStringLength(const char *charArray );
 
 int main(void){
     int length; 
     char countMe[] = "HELLO"; //5
     char countMe2[] = "Hello, my name is Vick"; //22
+    char imZeroLength[] = "";
     
     length = getStringLength(countMe);
     printf("The length of %s is %d \n", countMe, length);
 
     length = getStringLength(countMe2);
-    printf("The length of %s is %d \n", countMe, length);
+    printf("The length of %s is %d \n", countMe2, length);
+
+    length = getStringLength(imZeroLength);
+    printf("The length of zero length is %d \n", length);
+
     return 0;
 }
 
-int getStringLength(char * const charArray){
-    char * ptr = charArray; 
-    char * charEnd; 
+int getStringLength(const char * charArray){
+    const char * charEnd = charArray; 
 
-    while(*ptr){
-        ptr++;
+    while(*charEnd){
+        charEnd++;
     }
-    charEnd = ptr;
     return charEnd - &charArray[0];
 }
