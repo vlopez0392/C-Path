@@ -13,11 +13,9 @@ int main(void){
     printf("Values of and b after swap by value: a = %d, b = %d \n", a,b);
 
     //Calling swapV and printing the results 
-    printf("Values of and b before swap by refenrece: a = %d, b = %d \n", a,b);
-    int * ar = &a;
-    int * br = &b;
-    swapR(ar,br);
-    printf("Values of and b after swap by value: a = %d, b = %d \n", a,b);
+    printf("Values of and b before swap by : a = %d, b = %d \n", a,b);
+    swapR(&a, &b);
+    printf("Values of and b after swap by reference: a = %d, b = %d \n", a,b);
 
     return 0;
 }
