@@ -2,7 +2,7 @@
 * asciiPrinter.c                                                                                    *
 * This program reads input as a stream of characters until encountering EOF and                     *
 * prints each input character and its ASCII decimal value as pairs. 10 pairs per line are printed   *
-* unless a space character is encountered. Non-printable characters are skipped.                                                          *
+* unless a new-line character is encountered. Non-printable characters are skipped.                                                          *
 */
 #include <stdio.h>
 #include <string.h>
@@ -19,15 +19,13 @@ int main(void){
             lineNumber++;
         } 
 
-        if(counter < PAIRLIMIT){
+        if(counter < (PAIRLIMIT-1)){
             if(ch == '\n'){
-                ch = 'n';
-                printf("\n");
+                printf(" | \\n, %d |\n", asciiValue);
                 counter = 0;
                 continue;
-            }else{
-                counter++;
-            }
+            }               
+            counter++;
             printf(" | %c, %d | ", ch, asciiValue);
         }else{
             printf(" | %c, %d | ", ch, asciiValue);
