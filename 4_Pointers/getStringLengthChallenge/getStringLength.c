@@ -32,3 +32,5 @@ int getStringLength(const char * charArray){
     }
     return charEnd - &charArray[0];
 }
+
+
