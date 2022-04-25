@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <limits.h>
 
 int fib_memoized(int n, int r[], int size_r);
 void initialize_r(int *r, int size_r);
@@ -9,8 +8,10 @@ int main(void){
     int n = 10; 
     int r[11] = {0};
     initialize_r(r,n+1);
+    printArr(r,n+1);
     int res = fib_memoized(n+1, r, n+1);
     printf("Result is: %d", res);
+    printArr(r,n+1);
     return 0;
 }
 
@@ -18,7 +19,7 @@ void initialize_r(int *r, int size_r){
     *r = 0;
     *(r+1) = 1;
     for(int j = 2; j<size_r; j++){
-        *(r+j) = INT_MIN;    
+        *(r+j) = -1;    
     }
 }
 
@@ -29,7 +30,7 @@ void printArr(int *r, int size_r){
 }
 
 int fib_memoized(int n, int r[], int size_r){
-    if(r[n-1] != INT_MIN){
+    if(r[n-1] >= 0){
         return r[n-1];
     }else{
         r[n-1] = fib_memoized(n-1,r,size_r) + fib_memoized(n-2,r,size_r);
