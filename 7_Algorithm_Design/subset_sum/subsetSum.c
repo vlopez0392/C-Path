@@ -13,8 +13,8 @@ int subsetSumExists(int arr[],int startIdx, int sum);
 
 int main(void){
     int arr[5] = {7,3,2,5,8};
-    int sum = 21; 
-    int startIdx = 4;
+    int sum = 14; 
+    int startIdx = 5;
     int exists = subsetSumExists(arr, startIdx, sum);
     printf("Subset sum exists: %d", exists);
     return 0;
@@ -23,8 +23,8 @@ int main(void){
 //First call should be with startIdx = n, int sum = k
 int subsetSumExists(int arr[], int startIdx, int sum){
     //Base cases
-    //Combination exceeds sum
-    if(sum < 0){ 
+    //Combination exceeds sum or ran out of elements
+    if(sum < 0 || startIdx < 0){ 
         return 0;
 
     //Subset sums exactly to k
@@ -32,21 +32,8 @@ int subsetSumExists(int arr[], int startIdx, int sum){
         return 1;
     }
 
-    //Ran our of elements
-    if(startIdx < 0){
-        return 0;
-    }
-
     int include = subsetSumExists(arr, startIdx-1, sum - arr[startIdx -1]);
-    if(include){
-        return 1;
-    }
-    int exclude = subsetSumExists(arr, startIdx - 1, sum);
-    if (exclude){
-        return 1;
-    }
-
-
-
-    return 0;
+    int exclude = subsetSumExists(arr, startIdx-1, sum);
+    
+    return include || exclude ;
 }
