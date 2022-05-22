@@ -13,6 +13,7 @@ BSize: .word 3
 str1: .string "Product polynomial is "
 str2: .string "x^"
 str3: .string " + "
+str4: .string "\n" 
 
 .text
 _start:
@@ -25,16 +26,11 @@ _start:
     jal printPoly
     
     exit: 
-        li a7,10 
+        li a0,10 
         ecall
         
 multiplyPoly: 
-    addi a3, a3, -1
-    addi a4, a4, -1
     mv sp, a2
-    mv t2, zero
-    mv t4, zero
-    mv t5, zero
     mv t0, zero ##Outer loop index
     outer: 
         lw t2, 0(a0)
@@ -65,13 +61,14 @@ multiplyPoly:
         slli t4, t0,2
         jal zero, outer
     L1:
-    mv sp, a2
-    jr ra
+        mv sp, a2
+        jr ra
 
 
 initStack:  #Initialize stack to hold multiplication results    
-    add a6, a3,a4
-    addi a6, a6, -2  #Size of resulting polynomial will be held in a6
+    addi a3, a3, -1
+    addi a4, a4, -1
+    add a6,a3,a4 #Size of resulting polynomial will be held in a6
     mv t0,zero
     mv t1,zero 
     slli a5, a6, 2   #a5:Necessary space for the stack in bytes
@@ -87,29 +84,29 @@ initStack:  #Initialize stack to hold multiplication results
         jr ra
         
 printPoly:
-    la a0, str1
-    li a7, 4
+    la a1, str1
+    li a0, 4
     ecall
 
     mv t0, zero
     printLoop:
-        lw a0, 0(sp)
-        li a7, 1
+        lw a1, 0(sp)
+        li a0, 1
         ecall
         
         beq t0,zero, skipPow
-        la a0, str2
-        li a7, 4
+        la a1, str2
+        li a0, 4
         ecall
         
-        mv a0,t0
-        li a7, 1
+        mv a1,t0
+        li a0, 1
         ecall
         
         skipPow:
         beq t0, a6, skipAdd
-        la a0, str3
-        li a7, 4
+        la a1, str3
+        li a0, 4
         ecall
         
         skipAdd:
@@ -118,6 +115,9 @@ printPoly:
         addi sp,sp,4
         jal zero, printLoop
     L3:
+        la a1, str4  ##Print new line
+        li a0, 4
+        ecall
         jr ra
         
     
