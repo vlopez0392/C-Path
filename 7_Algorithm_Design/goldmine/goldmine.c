@@ -23,6 +23,7 @@
 int max(int a, int b, int c);
 int maxGold(int M[4][4], int i, int j, int n, int m);
 void printOPT(int OPT[], int size);
+void printField(int arr[][4], int n, int m);
 
 int main(void){ 
     // //Case 1
@@ -50,12 +51,13 @@ int main(void){
     for(int i = 0; i < n ; i++){
         OPT2[i] = maxGold(N, i, 0, n, m);
     }
+    printField(N, n, m);
     printOPT(OPT2, n);
     return 0;
 }
 
 int maxGold(int M[4][4], int i, int j, int n, int m){
-    //Base cases: Take impossible paths or reach the last column
+    //Base cases: Out of field bounds, return no 
     if(i < 0 || i == n || j==m){
         return 0;
     }
@@ -63,6 +65,7 @@ int maxGold(int M[4][4], int i, int j, int n, int m){
     return maxgold;
 }
 
+//Utility function to compute max of three integers
 int max(int a, int b, int c){
     if(a>=b && a>=c){
         return a;
@@ -75,5 +78,19 @@ int max(int a, int b, int c){
 void printOPT(int OPT[], int size){
     for(int i = 0; i < size ; i++){
         printf("Optimal gold collected from starting point (%d, %d) = %d \n", i,0,OPT[i]);
+    }
+}
+
+void printField(int arr[][4], int n, int m){
+    for(int i = 0; i < n ; i++){
+        for(int j = 0; j < m ; j++){
+            if(j == 0){
+                printf("| "); 
+            }
+            printf(" %d | ", arr[i][j]);
+            if(j == n-1){
+                printf("\n");
+            }
+        }
     }
 }
