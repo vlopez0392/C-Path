@@ -10,12 +10,17 @@ polynomialA: .word 1, 3, 7, 4
 polynomialB: .word 1, 0, 2, 5
 ASize: .word 4
 BSize: .word 4
+# additional test pattern
+#polynomialA: .word 1, 2, -1, -5, 0, 0, 0 ,0, 3
+#polynomialB: .word 3, -5, 2
+#ASize: .word 9
+#BSize: .word 3
 str1: .string "Product polynomial is "
 str2: .string "x^"
 str3: .string " + "
-str4: .string "\n" 
 
 .text
+.global _start
 _start:
     la a0, polynomialA
     la a1, polynomialB
@@ -26,7 +31,7 @@ _start:
     jal printPoly
     
     exit: 
-        li a0,10 
+        li a7,10 
         ecall
         
 multiplyPoly: 
@@ -61,8 +66,8 @@ multiplyPoly:
         slli t4, t0,2
         jal zero, outer
     L1:
-        mv sp, a2
-        jr ra
+    mv sp, a2
+    jr ra
 
 
 initStack:  #Initialize stack to hold multiplication results    
@@ -84,29 +89,29 @@ initStack:  #Initialize stack to hold multiplication results
         jr ra
         
 printPoly:
-    la a1, str1
-    li a0, 4
+    la a0, str1
+    li a7, 4
     ecall
 
     mv t0, zero
     printLoop:
-        lw a1, 0(sp)
-        li a0, 1
+        lw a0, 0(sp)
+        li a7, 1
         ecall
         
         beq t0,zero, skipPow
-        la a1, str2
-        li a0, 4
+        la a0, str2
+        li a7, 4
         ecall
         
-        mv a1,t0
-        li a0, 1
+        mv a0,t0
+        li a7, 1
         ecall
         
         skipPow:
         beq t0, a6, skipAdd
-        la a1, str3
-        li a0, 4
+        la a0, str3
+        li a7, 4
         ecall
         
         skipAdd:
@@ -115,9 +120,6 @@ printPoly:
         addi sp,sp,4
         jal zero, printLoop
     L3:
-        la a1, str4  ##Print new line
-        li a0, 4
-        ecall
         jr ra
         
     
