@@ -69,13 +69,12 @@ initStack:  #Initialize stack to hold multiplication results
     addi a3, a3, -1
     addi a4, a4, -1
     add a6,a3,a4 #Size of resulting polynomial will be held in a6
-    mv t0,zero
     mv t1,zero 
     slli a5, a6, 2   #a5:Necessary space for the stack in bytes
     sub sp,sp,a5
     mv a2,sp         
     loop:
-        sw t0, 0(sp)
+        sw zero, 0(sp)
         beq t1,a6, L2
         addi sp,sp,4
         addi t1,t1,1
